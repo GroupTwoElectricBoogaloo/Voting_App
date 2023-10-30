@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 
 
@@ -49,7 +50,8 @@ const CreateVote = ({ questionId, submissionId }) => {
         }}
         style={{ backgroundColor: active ? "green" : "white" }}
       >
-        <FontAwesomeIcon icon={faHeart} />
+        {/* <FontAwesomeIcon icon={faHeart} /> */}
+        <ArrowUpwardIcon/>
       </button>
     </Fragment>
   );

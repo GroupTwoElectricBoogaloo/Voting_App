@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import CreateVote from "../inputs/CreateVote";
 import AllVotes from "./AllVotes";
 import VideoEmbed from "./VideoEmbed";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const DisplaySubmissions = ({ questionId }) => {
   //socket logic
@@ -52,10 +53,8 @@ const DisplaySubmissions = ({ questionId }) => {
   //Get top submissions based on vote count
   const topVoted = [...submissionsData]
     .sort((a, b) => b.Vote.length - a.Vote.length)
-
-
-    console.log("submissionsData:", submissionsData);
-    console.log("topVoted:", topVoted);
+    // console.log("submissionsData:", submissionsData);
+    // console.log("topVoted:", topVoted);
 
   return (
     <div>
@@ -84,8 +83,9 @@ const DisplaySubmissions = ({ questionId }) => {
                   <VideoEmbed videoUrl={submission.link} />
                 </div>
                 <div className="user-votes">
-                  <p>{submission.user.username}</p>
-                  <div>
+                  <p>user: {submission.user.username}</p>
+                  <div style={{display: "flex"}}>
+                    <ArrowUpwardIcon/> 
                     <AllVotes submissionId={submission.id} />
                   </div>
                 </div>

@@ -8,7 +8,7 @@ import {
 import DisplaySubmissions from "../components/inputs/DisplaySubmissions";
 import Chart from "../components/Chart/Chart";
 
-const QuestionPage = ({ socket }) => {
+const QuestionPage = ({  }) => {
   const { questionId } = useParams();
 
   const { data: questionData, isLoading: questionLoading } =
@@ -24,7 +24,7 @@ const QuestionPage = ({ socket }) => {
     <div>
       {renderQuestion()}
       <CreateSubmission questionId={questionId} />
-      <DisplaySubmissions questionId={questionId} socket={socket}/>
+      <DisplaySubmissions questionId={questionId} />
       <Chart questionId={questionId}/>
     </div>
 
