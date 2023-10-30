@@ -42,7 +42,7 @@ const Chart = ({ questionId }) => {
 
   
   if (isLoading) return <p>Loading...</p>;
-  if (data.Submission.length > 0) {
+  if (data.Submission.map > 0) {
     const chartData = {
       labels: data.Submission.map((sub) => sub.link),
       datasets: [
@@ -53,7 +53,6 @@ const Chart = ({ questionId }) => {
           backgroundColor: "rgba(153, 102, 255, 0.2)",
           borderColor: "rgba(153, 102, 255, 0.2)",
           borderWidth: 2,
-        
         },
       ],
     };
@@ -62,9 +61,8 @@ const Chart = ({ questionId }) => {
   const options = {
     responsive: true,
   };
-  
-  return <Bar data={chartData} />;
-  };
-}
 
+  return <Bar data={chartData} />;
+  }
+};
 export default Chart;

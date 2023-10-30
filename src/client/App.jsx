@@ -9,7 +9,6 @@ import NavB from "./components/Nav";
 import PageNav from "./components/PageNav";
 import OAuthHandler from "./pages/OAuthHandler";
 import AccountSettings from "./pages/AccountSettings";
-import Footer from "./components/Footer/Footer";
 
 function App() {
    const storedToken = window.sessionStorage.getItem("credentials");
@@ -59,7 +58,6 @@ function App() {
             />
             <Route path="/oauthhandler" element={<OAuthHandler />} />
          </Routes>
-         <Footer/>
       </div>
    );
 }
