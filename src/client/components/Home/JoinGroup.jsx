@@ -27,7 +27,7 @@ const JoinGroup = () => {
 
          //Redirect to results page after 3 seconds
          setTimeout(() => {
-            navigate(`/results/${accessCode}`);
+            navigate(`/group/${accessCode}`);
          }, 3000);
       } catch (err) {
          console.error("Error creating group:", err);
