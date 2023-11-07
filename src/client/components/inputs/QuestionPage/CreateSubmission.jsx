@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAddSubmissionMutation } from "../../../reducers/api";
 import io from "socket.io-client";
-import { Link } from "react-router-dom";
 import "./CreateSubmission.scss";
+import ConditionalLink from "../../ConditionLink";
 
 const CreateSubmission = ({ groupId, userId, questionId }) => {
   const [submissionLink, setSubmissionLink] = useState("");
+  const [isValidLink, setIsValidLink] = useState(false);
+  console.log(isValidLink, "isvalid");
   const [createSubmission, { isSuccess, isError, error }] =
     useAddSubmissionMutation();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -14,18 +16,22 @@ const CreateSubmission = ({ groupId, userId, questionId }) => {
   const socket = io.connect("http://localhost:3000");
   socket.on("connect", () => {});
 
+  useEffect(() => {
+    setIsValidLink(checkYoutubeLink());
+  }, [submissionLink]);
+
+  function checkYoutubeLink() {
+    const url = submissionLink;
+    const p =
+      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+      return true;
+    }
+    return false;
+  }
+
   const handleCreateSubmission = async () => {
-    if (!submissionLink) {
-      setErrorMessage("Please provide a valid link.");
-      return;
-    }
-
     const videoId = submissionLink.split("v=")[1];
-
-    if (!videoId) {
-      setErrorMessage("Invalid YouTube URL");
-      return;
-    }
 
     try {
       const response = await createSubmission({
@@ -55,12 +61,23 @@ const CreateSubmission = ({ groupId, userId, questionId }) => {
         value={submissionLink}
         onChange={(e) => setSubmissionLink(e.target.value)}
       />
-      <Link to={{ pathname: `/question/${questionId}/submissions` }}>
-        {" "}
-        <button onClick={handleCreateSubmission} className="create-sub-button">
+      <ConditionalLink
+        condition={isValidLink}
+        path={{ pathname: `/question/${questionId}/submissions` }}
+      >
+        <button
+          onClick={() => {
+            if (checkYoutubeLink()) {
+              handleCreateSubmission();
+            } else {
+              alert("Invalid Youtube Link!");
+            }
+          }}
+          className="create-sub-button"
+        >
           Submit
         </button>
-      </Link>
+      </ConditionalLink>
 
       {isError && <p>{errorMessage || error.message}</p>}
     </div>

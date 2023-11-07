@@ -11,8 +11,10 @@ const DeleteGroup = ({ groupId }) => {
   const { refetch } = useDeleteGroupByCodeMutation(groupId);
   const handleDeleteGroup = async () => {
     try {
-      const response = await deleteGroup(groupId);
-      navigate(`/home`);
+      const response = await deleteGroup(groupId)
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
     } catch (err) {
       console.log("Error deleting group:", err);
     }
