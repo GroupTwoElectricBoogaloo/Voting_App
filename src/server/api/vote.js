@@ -38,9 +38,8 @@ router.post("/", protection, async (req, res, next) => {
 });
 
 router.get("/voted/:submissionId/", protection, async (req, res, next) => {
-
-  const userId = parseInt(req.user.id)
-  const submissionId = parseInt(req.params.submissionId)
+  const userId = parseInt(req.user.id);
+  const submissionId = parseInt(req.params.submissionId);
   try {
     const activeVote = await prisma.vote.findFirst({
       where: {
@@ -50,7 +49,6 @@ router.get("/voted/:submissionId/", protection, async (req, res, next) => {
     });
 
     res.status(200).send(activeVote);
-    console.log('active vote from get', activeVote)
   } catch (err) {
     console.error(err);
     next(err);

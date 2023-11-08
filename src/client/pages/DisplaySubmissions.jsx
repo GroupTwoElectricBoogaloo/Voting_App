@@ -22,12 +22,10 @@ const DisplaySubmissions = () => {
     socket.on("connect", () => {});
 
     socket.on("new_submission", (newSubmission) => {
-      console.log("new submission:", newSubmission);
       refetch(questionId);
     });
 
     socket.on("new_vote", (submissionId) => {
-      console.log("display submissions socket connected", socket.connected);
       refetch(questionId);
     });
 
@@ -78,7 +76,7 @@ const DisplaySubmissions = () => {
               // className={`ds-video-container${
               //   isClicked ? " vote-clicked" : ""
               // }`}
-              key={submission.id} 
+              key={submission.id}
             >
               <div>
                 <div>
@@ -89,7 +87,7 @@ const DisplaySubmissions = () => {
                     <CreateVote
                       questionId={questionId}
                       submissionId={submission.id}
-                    /> 
+                    />
                     {/* {CheckVotes(submission.id) && <h1>true</h1>} */}
                   </div>
                 </div>

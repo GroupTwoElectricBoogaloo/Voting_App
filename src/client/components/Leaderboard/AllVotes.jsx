@@ -1,4 +1,4 @@
-import { useGetVotesForSubQuery  } from "../../reducers/api";
+import { useGetVotesForSubQuery } from "../../reducers/api";
 import { io } from "socket.io-client";
 import { useEffect } from "react";
 import "./AllVotes.scss";
@@ -13,10 +13,7 @@ const AllVotes = ({ submissionId }) => {
     socket.on("connect", () => {});
 
     socket.on("new_vote", (submissionId) => {
-      console.log("AllVotes socket connected:", socket.connected);
-      // console.log("AllVotes submissionId:", submissionId);
       refetch(submissionId);
-      // console.log("refetched");
     });
 
     return () => {
@@ -24,12 +21,11 @@ const AllVotes = ({ submissionId }) => {
     };
   }, []);
 
-  // const { refetch } = useGetVotesForSubQuery(submissionId);
-  // console.log('sub id from all votes', submissionId)
-
   return (
     <>
-      {isLoading ? null : data.length > 0 && <div className="votes"> {data.length} </div>}
+      {isLoading
+        ? null
+        : data.length > 0 && <div className="votes"> {data.length} </div>}
     </>
   );
 };

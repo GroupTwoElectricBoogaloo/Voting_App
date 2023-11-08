@@ -18,12 +18,7 @@ import CloseQuestion from "../components/GroupPage/CloseQuestion";
 import "./GroupPage.scss";
 
 const GroupPage = () => {
-   const state = useSelector((state) => state);
-   console.log("state: ", state);
    const { accessCode } = useParams();
-
-   console.log("access code in group page", accessCode);
-
    const {
       data: groupData,
       isLoading: groupLoading,
@@ -45,7 +40,6 @@ const GroupPage = () => {
    const [copySuccess, setCopySuccess] = useState("");
 
    const { data: currentUser } = useGetCurrentUserQuery();
-   console.log("currentUser", currentUser);
    const isAdmin = currentUser?.user?.roles?.some(
       (role) => role.group_id === groupData?.id && role.is_admin
    );
@@ -60,7 +54,6 @@ const GroupPage = () => {
          if (result.error) {
             console.error("Error editing group name:", result.error);
          } else {
-            console.log(`Group name updated`, newGroupName);
             refetch();
          }
       } catch (error) {

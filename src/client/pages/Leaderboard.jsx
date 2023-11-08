@@ -1,6 +1,5 @@
 import {
   useGetSubmissionsForQuestionQuery,
-  useGetVotesForSubQuery,
   useGetQuestionByIdQuery,
 } from "../reducers/api";
 import { useEffect, useState } from "react";
@@ -20,12 +19,10 @@ const Leaderboard = () => {
     socket.on("connect", () => {});
 
     socket.on("new_submission", (newSubmission) => {
-      console.log("new submission:", newSubmission);
       refetch(questionId);
     });
 
     socket.on("new_vote", (submissionId) => {
-      console.log("leaderboard socket connected", socket.connected);
       refetch(questionId);
       // topVoted.forEach((submission) => refetchVotes(submission.id));
     });
@@ -36,7 +33,6 @@ const Leaderboard = () => {
   }, []);
 
   const { refetch } = useGetSubmissionsForQuestionQuery(questionId);
-  // const { refetchVotes } = useGetVotesForSubQuery(submissionId);
 
   const {
     data: submissionsData,

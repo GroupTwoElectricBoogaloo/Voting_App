@@ -8,9 +8,6 @@ const questions = require("./data/questions.js")
 const groups = require("./data/groups.js")
 
 async function seed() {
-    console.log("Running seed")
-
-    console.log("Removing previous data")
     const deleteUsers = prisma.user.deleteMany({
         where: {
             id: {not: 1}

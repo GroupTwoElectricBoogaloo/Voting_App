@@ -1,17 +1,11 @@
 import React from "react";
 import { useGetVotesForSubByUserQuery } from "../../../reducers/api";
 
-const CheckVotes = ({submissionId}) => {
-    const {data: votes} = useGetVotesForSubByUserQuery(submissionId);
-    const voteExists = !!votes  
-    console.log('voted from checkVotes', votes, submissionId)
+const CheckVotes = ({ submissionId }) => {
+  const { data: votes } = useGetVotesForSubByUserQuery(submissionId);
+  const voteExists = !!votes;
 
-    
-    
-
-  return voteExists
-
+  return voteExists;
 };
 
 export default CheckVotes;
-

@@ -18,8 +18,6 @@ function AccountSettings() {
   const { data: currentUser, isError, isLoading } = useGetCurrentUserQuery();
   const [editUser, { isLoading: isEditingUser }] = useEditUserMutation();
 
-  console.log("in accounts:", currentUser);
-
   const [showChangeUsername, setShowChangeUsername] = useState(false);
   const [newUsername, setNewUsername] = useState("");
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -34,10 +32,6 @@ function AccountSettings() {
   const [error, setError] = useState(null);
 
   const timeoutId = useRef(null);
-
-  // const handleDropdownToggle = () => {
-  //   setShowDropdown(!showDropdown);
-  // };
 
   const handleUsernameSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +48,6 @@ function AccountSettings() {
       clearTimeout(timeoutId.current);
       timeoutId.current = setTimeout(() => setUpdateSuccess(false), 5000);
     } catch (err) {
-      console.log(err);
       if (err.data && typeof err.data === "string") {
         setError(err.data);
       } else {
@@ -92,7 +85,6 @@ function AccountSettings() {
       clearTimeout(timeoutId.current);
       timeoutId.current = setTimeout(() => setUpdateSuccess(false), 5000);
     } catch (err) {
-      console.log(err);
       if (err.data && err.data.error) {
         setError(err.data.error);
       } else {
@@ -122,7 +114,6 @@ function AccountSettings() {
   return (
     <div className="as-container">
       <h2 className="as-title">Account Settings</h2>
-      {/* {LogoutMessage && <div className="message">{LogoutMessage}</div>} */}
       {updateSuccess && (
         <div className="message">
           Your account has been updated successfully!

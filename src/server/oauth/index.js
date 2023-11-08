@@ -30,7 +30,6 @@ router.post("/oauth", async (req, res, next) => {
             // if the name does, generate a new username, and recheck the database    
         } while(dbuser);
         // if the name is not found, return it
-        console.log(username)
         return username;
     }
 
@@ -38,7 +37,6 @@ router.post("/oauth", async (req, res, next) => {
         const existingUser = await prisma.User.findFirst({ where: { email } });
         // if no user is found, make one
         if (!existingUser) {
-            console.log("Random name function", randomName())
             const newUser = await prisma.User.create({
                 data:{
                     username: await randomName(),
