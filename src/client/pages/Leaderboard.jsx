@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import Chart from "../components/Chart/Chart";
 import AllVotes from "../components/Leaderboard/AllVotes";
 import VideoEmbed from "../components/Leaderboard/VideoEmbed";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Leaderboard.scss";
 
 const Leaderboard = () => {
@@ -79,6 +79,20 @@ const Leaderboard = () => {
           </div>
         ))}
       </div>
+      <div>
+          <Link
+            to={{
+              pathname: `/question/${questionId}/submissions`,
+            }}
+          >
+            <button
+              className="ds-back-button"
+              onClick={refetch}
+            >
+              BACK
+            </button>
+          </Link>
+        </div>
       <div className="lb-chart">
         <Chart questionId={questionId} />
       </div>

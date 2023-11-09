@@ -1,12 +1,10 @@
 import {
   useGetSubmissionsForQuestionQuery,
   useGetQuestionByIdQuery,
-  useGetVotesForSubByUserQuery,
 } from "../reducers/api";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import CreateVote from "../components/inputs/DisplaySubmissions/CreateVote";
-import AllVotes from "../components/Leaderboard/AllVotes";
 import VideoEmbed from "../components/Leaderboard/VideoEmbed";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
